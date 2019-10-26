@@ -1,8 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 public class ManagerImplTest {
 
@@ -32,6 +31,12 @@ public class ManagerImplTest {
         } catch(Exception e){
             assertTrue(true);
         }
+    }
+    
+    @Test
+    public void theLastCardIsTheRightOne() {
+        manager.manage(4);
+        assertEquals(manager.getCard(3), manager.getLastCard());
     }
 
 
