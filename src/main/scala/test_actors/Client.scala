@@ -29,7 +29,7 @@ class Client(remote: InetSocketAddress) extends Actor {
       println("Client connected! -> " + c)
       val connection = sender()
       connection ! Register(self)
-      connection ! Write(Asshole("bitch"))
+      connection ==> Asshole("bitch")
       context.become {
         case CommandFailed(w: Write) =>
           // O/S buffer was full
