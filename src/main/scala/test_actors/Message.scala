@@ -1,6 +1,7 @@
 package test_actors
 
-import akka.io.Tcp.Received
+import akka.actor.ActorRef
+import akka.io.Tcp.{Received, Write}
 import akka.util.ByteString
 import play.api.libs.json.{JsValue, Json, OFormat}
 
@@ -45,6 +46,10 @@ object Message{
     val elemParsed = Json.parse(originalMessage)
     val elem = Json.fromJson[Message](elemParsed)
     if(elem.isSuccess) elem.get else null
+  }
+
+  implicit class MyPersonalSender(actor: ActorRef){
+    def ==>(message: Message): Unit = actor ! Write(message)
   }
 
 }

@@ -46,9 +46,9 @@ class SimplisticHandler(connection: ActorRef) extends Actor {
       val msgReceived = extractMessage(data)
       println("Server received -> " + msgReceived)
       msgReceived match {
-        case Hello(_) => connection ! Write(Goodbye(5))
-        case Goodbye(_) => connection ! Write(Asshole("You're really an asshole, do you?"))
-        case Asshole(_) => connection ! Write(Asshole("Take it back!!!"))
+        case Hello(_) => connection ==> Goodbye(5)
+        case Goodbye(_) => connection ==> Asshole("You're really an asshole, do you?")
+        case Asshole(_) => connection ==> Asshole("Take it back!!!")
         case _ =>
       }
     case "close" =>
